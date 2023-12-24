@@ -33,6 +33,8 @@ class Threat_BLL:
     def ignore_threat(number):
         return Threat_BLL.threats[number].ignore()
         
+    def safe_threat(number):
+        return Threat_BLL.threats[number].safe()
 
     def limit_threat(number):
         return Threat_BLL.threats[number].limit()

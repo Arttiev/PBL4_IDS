@@ -39,7 +39,7 @@ class Threat:
     def to_csv_form(self):
         return self.src_IP + "," + self.dst_IP + "," + self.proto + "," + str(self.occur) + "," + str(self.action_taken)
     
-    def ignore(self):
+    def safe(self):
         """
         Need to add following rule to local.rules
         """
@@ -48,6 +48,10 @@ class Threat:
         self.action_taken=True
         return result
     
+    def ignore(self):
+        self.action_taken=True
+        return "Ignored"
+
     def limit(self):
         """
         Need to execute following firewall rule
@@ -59,12 +63,10 @@ class Threat:
 
     def block(self):
         """
-        Need to add following rule to local.rules & execute firewall rule
+        Need to execute following firewall rule
         """
-        new_rule = "block " + self.proto.lower() + " " + self.src_IP + " any -> " + self.dst_IP + " any"
         new_ufw = "ufw --dry-run deny proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
-        result = mf.add_local_rules(new_rule)
-        result += mf.ufw_execute(new_ufw)
+        result = mf.ufw_execute(new_ufw)
         self.action_taken=True
         return result
     
