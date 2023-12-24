@@ -44,3 +44,9 @@ dir_config = "/usr/local/etc/snort/snort.lua"
 # another approach:
 # last_ = os.popen("tail -10 /var/log/snort/alert_csv.txt").read()
 # print(last_)
+
+from Threat_BLL import *
+
+bll = Threat_BLL()
+for t in bll.threats:
+    print(t.to_csv_form())

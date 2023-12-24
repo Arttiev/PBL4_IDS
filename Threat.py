@@ -1,4 +1,7 @@
 # define class Threat
+
+import modify_files as mf
+
 class Threat:
     """
     Class Threat denote a specific traffic that is suspicious,
@@ -41,6 +44,7 @@ class Threat:
         Need to add following rule to local.rules
         """
         new_rule = "pass " + self.proto + " " + self.src_IP + " any -> " + self.dst_IP + " any"
+        mf.add_local_rules(new_rule)
         self.action_taken=True
         return
     
@@ -49,6 +53,7 @@ class Threat:
         Need to execute following firewall rule
         """
         new_rule = "ufw limit proto " + self.proto + " from " + self.src_IP + " to " + self.dst_IP 
+        mf.ufw_execute(new_rule)
         self.action_taken=True
         return
 
@@ -58,6 +63,8 @@ class Threat:
         """
         new_rule = "block " + self.proto + " " + self.src_IP + " any -> " + self.dst_IP + " any"
         new_ufw = "ufw deny proto " + self.proto + " from " + self.src_IP + " to " + self.dst_IP 
+        mf.add_local_rules(new_rule)
+        mf.ufw_execute(new_ufw)
         self.action_taken=True
         return
     
