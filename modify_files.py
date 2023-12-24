@@ -21,7 +21,7 @@ def reload_service(service):
 
 def ufw_execute(cmd):
     try:
-        var = os.popen(cmd)
+        var = os.popen(cmd).read()
         return var
     except PermissionError:
         return "Require permission"

@@ -31,14 +31,14 @@ class Threat_BLL:
         return
 
     def ignore_threat(number):
-        Threat_BLL.threats[number].ignore()
-        return
+        return Threat_BLL.threats[number].ignore()
+        
 
     def limit_threat(number):
-        Threat_BLL.threats[number].limit()
+        return Threat_BLL.threats[number].limit()
 
     def block_threat(number):
-        Threat_BLL.threats[number].block()
+        return Threat_BLL.threats[number].block()
 
     def update_threat_list():
         markline = 0

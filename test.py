@@ -47,6 +47,12 @@ dir_config = "/usr/local/etc/snort/snort.lua"
 
 from Threat_BLL import *
 
-bll = Threat_BLL()
+bll = Threat_BLL() # get instance of Threat_BLL => threat list
+print(Threat_BLL.ignore_threat(0))
+print(Threat_BLL.limit_threat(1))
+print(Threat_BLL.block_threat(2))
+
 for t in bll.threats:
     print(t.to_csv_form())
+
+

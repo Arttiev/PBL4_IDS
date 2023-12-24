@@ -43,28 +43,28 @@ class Threat:
         """
         Need to add following rule to local.rules
         """
-        new_rule = "pass " + self.proto + " " + self.src_IP + " any -> " + self.dst_IP + " any"
-        mf.add_local_rules(new_rule)
+        new_rule = "pass " + self.proto.lower() + " " + self.src_IP + " any -> " + self.dst_IP + " any"
+        result = mf.add_local_rules(new_rule)
         self.action_taken=True
-        return
+        return result
     
     def limit(self):
         """
         Need to execute following firewall rule
         """
-        new_rule = "ufw limit proto " + self.proto + " from " + self.src_IP + " to " + self.dst_IP 
-        mf.ufw_execute(new_rule)
+        new_rule = "ufw --dry-run limit proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
+        result = mf.ufw_execute(new_rule)
         self.action_taken=True
-        return
+        return result
 
     def block(self):
         """
         Need to add following rule to local.rules & execute firewall rule
         """
-        new_rule = "block " + self.proto + " " + self.src_IP + " any -> " + self.dst_IP + " any"
-        new_ufw = "ufw deny proto " + self.proto + " from " + self.src_IP + " to " + self.dst_IP 
-        mf.add_local_rules(new_rule)
-        mf.ufw_execute(new_ufw)
+        new_rule = "block " + self.proto.lower() + " " + self.src_IP + " any -> " + self.dst_IP + " any"
+        new_ufw = "ufw --dry-run deny proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
+        result = mf.add_local_rules(new_rule)
+        result += mf.ufw_execute(new_ufw)
         self.action_taken=True
-        return
+        return result
     
