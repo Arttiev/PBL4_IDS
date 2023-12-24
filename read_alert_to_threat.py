@@ -1,5 +1,7 @@
 from Threat import *
 
+dir_log = "/var/log/snort/alert_csv.txt"
+
 def read_alert_to_threat():
     # open threats.txt, append all into threats
     """
@@ -20,7 +22,7 @@ def read_alert_to_threat():
             threats.append(Threat(temp[0],temp[1],temp[2],int(temp[3]),temp[4]=="True"))
 
     # open alert_fast.txt, look for new threats
-    with open("alert_csv.txt", "r") as file:
+    with open(dir_log, "r") as file:
         lines = file.readlines()  # Read all lines into a list
         for i in range(markline,len(lines)):
             # timestamp, action, protocol, gid, sid, rev, msg, service, src_IP, src_port, dst_IP, dst_port
@@ -28,10 +30,15 @@ def read_alert_to_threat():
             line = lines[i].strip()  # Remove trailing newline characters
             temp = line.split(",")  # Split the line using comma as the separator
             threat = Threat(temp[8],temp[10],temp[2])
-            print(threat.to_csv_form())
+            if(threat.src_IP=='unknown' 
+               or threat.src_IP==''
+               or threat.dst_IP==''
+               or threat.dst_IP=='unknown'
+               or threat.proto==''
+               or threat.proto=='unknown'):
+                continue
             check = 0
             for j in range(len(threats)):
-                print(threats[j]==threat)
                 if threats[j] == threat:
                     threats[j].occur += 1
                     check = 1

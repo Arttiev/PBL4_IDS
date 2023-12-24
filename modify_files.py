@@ -16,10 +16,16 @@ def add_local_rules(new_rule):
         return "Require permission"
     
 def reload_service(service):
-    # os.popen("systemctl reload <service>")
-    return
+    # should be used to reload snort-nids
+    try:
+        os.popen("systemctl stop snort3-nids") 
+        var = os.popen("systemctl start snort3-nids").read()
+    except PermissionError:
+        return "Require permission"
+    return "Snort reloaded"
 
 def ufw_execute(cmd):
+    # run ufw_execute("ufw reload") to reload firewall and apply new rules
     try:
         var = os.popen(cmd).read()
         return var

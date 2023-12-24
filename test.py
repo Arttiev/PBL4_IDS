@@ -1,5 +1,5 @@
 import os
-import ufw
+from read_alert_to_threat import *
 
 print("Hello world!")
 
@@ -45,14 +45,14 @@ dir_config = "/usr/local/etc/snort/snort.lua"
 # last_ = os.popen("tail -10 /var/log/snort/alert_csv.txt").read()
 # print(last_)
 
-from Threat_BLL import *
+# from Threat_BLL import *
 
-bll = Threat_BLL() # get instance of Threat_BLL => threat list
-print(Threat_BLL.ignore_threat(0))
-print(Threat_BLL.limit_threat(1))
-print(Threat_BLL.block_threat(2))
+# bll = Threat_BLL() # get instance of Threat_BLL => threat list
+# print(Threat_BLL.ignore_threat(0))
+# print(Threat_BLL.limit_threat(1))
+# print(Threat_BLL.block_threat(2))
 
-for t in bll.threats:
-    print(t.to_csv_form())
+# for t in bll.threats:
+#     print(t.to_csv_form())
 
-
+read_alert_to_threat()
