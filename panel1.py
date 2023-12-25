@@ -82,11 +82,10 @@ def show_panel(parent_frame):
     # Thêm các nút dưới bảng
     add_buttons_below_tree(parent_frame,tree)
 
-# Mở cửa sổ và hiển thị bảng
+# Mở cửa sổ và hiển thị bảng (không gọi)
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("Panel 1")
-
     # Chỉ cần gọi hàm show_panel với đường dẫn đến file txt
     show_panel(root)
 
