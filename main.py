@@ -10,19 +10,19 @@ class MyApp:
         # Tạo thanh điều hướng bên trái
         self.navigation_frame = ttk.Frame(self.root, width=5)
         self.navigation_frame.grid(row=0, column=0, sticky="ns")
-        self.navigation_frame.config(width=150, height=400)
+        self.navigation_frame.config(width=100, height=400)
 
         # Tạo khung viền cho nội dung bên phải
         self.content_frame_border = ttk.Frame(self.root, borderwidth=2, relief="ridge")
         self.content_frame_border.grid(row=0, column=1, sticky="nsew", padx=(0, 10),pady = (0,10))
-        self.content_frame_border.config(width=450, height=400)
+        self.content_frame_border.config(width=500, height=400)
         self.content_frame_border.grid_propagate(False)
         # Tạo nội dung bên phải
         self.content_frame = ttk.Frame(self.content_frame_border)
         self.content_frame.pack(fill="both", expand=True)
         # Đặt trọng số để phân chia tỉ lệ 1:4
-        self.root.grid_columnconfigure(0,  minsize=150)
-        self.root.grid_columnconfigure(1, weight=4)  # Giảm trọng số để nội dung chiếm phần lớn
+        self.root.grid_columnconfigure(0,  minsize=100)
+        self.root.grid_columnconfigure(1, weight=5)  # Giảm trọng số để nội dung chiếm phần lớn
         self.root.grid_rowconfigure(0, weight=1)
         # Thêm các mục vào thanh điều hướng
         self.add_navigation_items()

@@ -72,6 +72,13 @@ def show_panel(parent_frame):
     # Hiển thị Treeview
     tree.pack(expand=True, fill="both")
 
+    x_scrollbar = ttk.Scrollbar(parent_frame, orient="horizontal", command=tree.xview)
+    x_scrollbar.pack(side="bottom", fill="x")
+
+    # Tạo một cột ảo với chiều rộng lớn để tạo nút cuộn ngang
+
+    # Kết nối thanh cuộn ngang với cột ảo
+    tree.configure(xscrollcommand=x_scrollbar.set)
     # Thêm các nút dưới bảng
     add_buttons_below_tree(parent_frame,tree)
 
@@ -81,6 +88,6 @@ if __name__ == "__main__":
     root.title("Panel 1")
 
     # Chỉ cần gọi hàm show_panel với đường dẫn đến file txt
-    show_panel(root, "threats.txt")
+    show_panel(root)
 
     root.mainloop()
