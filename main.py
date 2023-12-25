@@ -62,3 +62,4 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = MyApp(root)
     root.mainloop()
+    Threat_BLL.update_threat_list()

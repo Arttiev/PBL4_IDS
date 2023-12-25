@@ -46,6 +46,7 @@ class Threat:
         new_rule = "pass " + self.proto.lower() + " " + self.src_IP + " any -> " + self.dst_IP + " any"
         result = mf.add_local_rules(new_rule)
         self.action_taken=True
+        mf.reload_ufw()
         return result
     
     def ignore(self):
@@ -56,17 +57,19 @@ class Threat:
         """
         Need to execute following firewall rule
         """
-        new_rule = "ufw --dry-run prepend limit proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
+        new_rule = "ufw route prepend limit proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
         result = mf.ufw_execute(new_rule)
         self.action_taken=True
+        mf.reload_ufw()
         return result
 
     def block(self):
         """
         Need to execute following firewall rule
         """
-        new_ufw = "ufw --dry-run prepend deny proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
+        new_ufw = "ufw route prepend deny proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
         result = mf.ufw_execute(new_ufw)
         self.action_taken=True
+        mf.reload_ufw()
         return result
     

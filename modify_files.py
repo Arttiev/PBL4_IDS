@@ -15,6 +15,14 @@ def add_local_rules(new_rule):
     except PermissionError:
         return "Require permission"
     
+def reload_ufw():
+    try:
+        os.system("ufw disable")
+        os.system("ufw enable")
+    except PermissionError:
+        return "Require permission"
+    return "Ufw reloaded"
+
 def reload_service(service):
     # should be used to reload snort-nids
     try:
