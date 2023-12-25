@@ -66,7 +66,7 @@ def show_panel(parent_frame):
     # Đặt dữ liệu vào bảng
     # for i, row in enumerate(data_from_file):
     #     tree.insert("", i, text=str(i), values=row)
-    for i,threat in enumerate(Threat_BLL.get_all_threat()):
+    for i,threat in enumerate(Threat_BLL.to_tuples()):
         tree.insert("",i,text=str(i),values=threat)
     # Hiển thị Treeview
     tree.pack(expand=True, fill="both")
