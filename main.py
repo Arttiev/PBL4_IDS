@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Threat_BLL import *
+# Tam thoi ok, khong can sua them
 class MyApp:
     def __init__(self, root):
         self.root = root
