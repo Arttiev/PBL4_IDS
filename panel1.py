@@ -15,7 +15,7 @@ def on_button1_click(tree):
     if selected_item:
         item_values = tree.item(selected_item, 'values')
         source_ip = item_values[0]
-        print(f"Đã chọn đối tượng với Source IP: {source_ip}")
+        print(f"Đã chọn đối tượng với Source IP: {source_ip} {item_values[1]}")
     else:
         print("No item selected")
 

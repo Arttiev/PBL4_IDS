@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-
+from Threat_BLL import *
 class MyApp:
     def __init__(self, root):
         self.root = root
