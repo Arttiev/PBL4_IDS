@@ -46,8 +46,6 @@ def add_buttons_below_tree(parent_frame,tree):
 
 def show_panel(parent_frame):
     # Đọc dữ liệu từ file
-    file_path = "threats.txt"
-    data_from_file = read_data_from_file(file_path)
 
     # Tạo Treeview để hiển thị bảng
     tree = ttk.Treeview(parent_frame, columns=("Source IP", "Destination IP", "Protocol", "Size", "Success"))

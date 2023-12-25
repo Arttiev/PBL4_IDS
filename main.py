@@ -57,6 +57,7 @@ class MyApp:
             print(f"Error loading panel: {panel_filename}")
 
 if __name__ == "__main__":
+    Threat_BLL()
     root = tk.Tk()
     app = MyApp(root)
     root.mainloop()
