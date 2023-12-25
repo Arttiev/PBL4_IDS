@@ -56,7 +56,7 @@ class Threat:
         """
         Need to execute following firewall rule
         """
-        new_rule = "ufw --dry-run limit proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
+        new_rule = "ufw --dry-run prepend limit proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
         result = mf.ufw_execute(new_rule)
         self.action_taken=True
         return result
@@ -65,7 +65,7 @@ class Threat:
         """
         Need to execute following firewall rule
         """
-        new_ufw = "ufw --dry-run deny proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
+        new_ufw = "ufw --dry-run prepend deny proto " + self.proto.lower() + " from " + self.src_IP + " to " + self.dst_IP 
         result = mf.ufw_execute(new_ufw)
         self.action_taken=True
         return result
