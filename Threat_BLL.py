@@ -52,7 +52,15 @@ class Threat_BLL:
             file.write(str(markline)+"\n")
             for i in range(len(Threat_BLL.threats)):
                 file.write(Threat_BLL.threats[i].to_csv_form()+"\n")
-
+    def to_tuples():
+        """
+        convert list[Threat] to list(tuples)
+        """
+        d = []
+        for th in Threat_BLL.threats:
+            if not th.action_taken: # neu chua xu ly thi moi view
+                d.append((th.src_IP,th.dst_IP,th.proto,th.occur))
+        return d
 # How to use
 # bll = Threat_BLL()
 # print(len(Threat_BLL.threats))
