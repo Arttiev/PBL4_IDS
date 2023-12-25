@@ -4,7 +4,7 @@ from tkinter import ttk
 class MyApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("My App")
+        self.root.title("Quản trị mạng")
         self.root.geometry("600x400")  # Tăng kích thước cửa sổ
         self.root.resizable(width=False, height=True)
         # Tạo thanh điều hướng bên trái
