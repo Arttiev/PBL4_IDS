@@ -9,39 +9,48 @@ def read_data_from_file(file_path):
         data = [tuple(line.strip().split(',')) for line in lines]
     return data
 
-def on_button1_click(tree):
+def safe_button_click(tree):
     print("Button 1 clicked")
-    selected_item = tree.selection()
-    if selected_item:
-        item_values = tree.item(selected_item, 'values')
-        source_ip = item_values[0]
-        print(f"Đã chọn đối tượng với Source IP: {source_ip} {item_values[1]}")
-    else:
-        print("No item selected")
+    selected_items = tree.selection()
+    if selected_items:
+        selected_index = tree.index(selected_items[0])
+        print(Threat_BLL.safe_threat(selected_index))
 
-def on_button2_click():
+def ignore_button_click(tree):
     print("Button 2 clicked")
+    selected_items = tree.selection()
+    if selected_items:
+        selected_index = tree.index(selected_items[0])
+        print(Threat_BLL.ignore_threat(selected_index))
 
-def on_button3_click():
+def limit_button_click(tree):
     print("Button 3 clicked")
+    selected_items = tree.selection()
+    if selected_items:
+        selected_index = tree.index(selected_items[0])
+        print(Threat_BLL.limit_threat(selected_index))
 
-def on_button4_click():
+def block_button_click(tree):
     print("Button 4 clicked")
+    selected_items = tree.selection()
+    if selected_items:
+        selected_index = tree.index(selected_items[0])
+        print(Threat_BLL.block_threat(selected_index))
 
 def add_buttons_below_tree(parent_frame,tree):
     button_frame = ttk.Frame(parent_frame)
     button_frame.pack()
 
-    button1 = ttk.Button(button_frame, text="Button 1", command= lambda: on_button1_click(tree))
+    button1 = ttk.Button(button_frame, text="Safe", command= lambda: safe_button_click(tree))
     button1.grid(row=0, column=0, padx=5)
 
-    button2 = ttk.Button(button_frame, text="Button 2", command=on_button2_click)
+    button2 = ttk.Button(button_frame, text="Ignore", command=lambda: ignore_button_click(tree))
     button2.grid(row=0, column=1, padx=5)
 
-    button3 = ttk.Button(button_frame, text="Button 3", command=on_button3_click)
+    button3 = ttk.Button(button_frame, text="Limit", command=lambda: limit_button_click(tree))
     button3.grid(row=0, column=2, padx=5)
 
-    button4 = ttk.Button(button_frame, text="Button 4", command=on_button4_click)
+    button4 = ttk.Button(button_frame, text="Block", command=lambda: block_button_click(tree))
     button4.grid(row=0, column=3, padx=5)
 
 def show_panel(parent_frame):
