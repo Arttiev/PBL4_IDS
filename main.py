@@ -19,9 +19,9 @@ class MyApp:
         self.content_frame_border.grid_propagate(False)
         # Tạo nội dung bên phải
         self.content_frame = ttk.Frame(self.content_frame_border)
-        self.content_frame.pack(fill="both", expand=False)
+        self.content_frame.pack(fill="both", expand=True)
         # Đặt trọng số để phân chia tỉ lệ 1:4
-        self.root.grid_columnconfigure(0, weight=1)
+        self.root.grid_columnconfigure(0,  minsize=150)
         self.root.grid_columnconfigure(1, weight=4)  # Giảm trọng số để nội dung chiếm phần lớn
         self.root.grid_rowconfigure(0, weight=1)
         # Thêm các mục vào thanh điều hướng
