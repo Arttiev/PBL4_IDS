@@ -38,7 +38,6 @@ class MyApp:
         # Xóa nội dung hiện tại
         for widget in self.content_frame.winfo_children():
             widget.destroy()
-
         # Hiển thị nội dung mới tương ứng với mục được chọn
         if item_number == 1:
             self.load_panel("panel1.py")
