@@ -27,6 +27,7 @@ class Threat_BLL:
                 #   0       1         2       3         4
                 line = lines[i].strip()
                 temp = line.split(",")
+                th = Threat(temp[0],temp[1],temp[2])
                 Threat_BLL.threats.append(Threat(temp[0],temp[1],temp[2],int(temp[3]),temp[4]=="True"))
         return
 

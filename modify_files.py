@@ -17,8 +17,7 @@ def add_local_rules(new_rule):
     
 def reload_ufw():
     try:
-        os.system("ufw disable")
-        os.system("ufw enable")
+        os.system("ufw reload")
     except PermissionError:
         return "Require permission"
     return "Ufw reloaded"

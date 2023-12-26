@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Threat_BLL import *
+from read_alert_to_threat import *
 
 def read_data_from_file(file_path):
     with open(file_path, 'r') as file:
@@ -55,7 +56,8 @@ def add_buttons_below_tree(parent_frame,tree):
 
 def show_panel(parent_frame):
     # Đọc dữ liệu từ file
-
+    read_alert_to_threat()
+    Threat_BLL.load_threat()
     # Tạo Treeview để hiển thị bảng
     tree = ttk.Treeview(parent_frame, columns=("Source IP", "Destination IP", "Protocol", "Size", "Success"))
     # Đặt tên cột và định dạng
