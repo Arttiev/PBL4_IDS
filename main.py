@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Threat_BLL import *
+from read_alert_to_threat import *
 # Tam thoi ok, khong can sua them
 class MyApp:
     def __init__(self, root):
@@ -34,6 +35,13 @@ class MyApp:
         for i, item in enumerate(items):
             button = ttk.Button(self.navigation_frame, text=item, command=lambda i=i: self.show_content(i+1))
             button.grid(row=i, column=0, sticky="ew")
+        button = ttk.Button(self.navigation_frame, text="Reload", command= lambda: self.reload_on_click())
+        button.grid(row = 4, column = 0, sticky= "s")
+
+    def reload_on_click(self):
+        read_alert_to_threat()
+        Threat_BLL.load_threat()
+        return
 
     def show_content(self, item_number):
         # Xóa nội dung hiện tại
@@ -58,6 +66,7 @@ class MyApp:
             print(f"Error loading panel: {panel_filename}")
 
 if __name__ == "__main__":
+    read_alert_to_threat()
     Threat_BLL()
     root = tk.Tk()
     app = MyApp(root)
