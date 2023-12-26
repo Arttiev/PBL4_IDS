@@ -39,6 +39,7 @@ class MyApp:
         button.grid(row = 4, column = 0, sticky= "s")
 
     def reload_on_click(self):
+        Threat_BLL.update_threat_list()
         read_alert_to_threat()
         Threat_BLL.load_threat()
         return
@@ -67,7 +68,7 @@ class MyApp:
 
 if __name__ == "__main__":
     read_alert_to_threat()
-    Threat_BLL()
+    Threat_BLL.load_threat()
     root = tk.Tk()
     app = MyApp(root)
     root.mainloop()

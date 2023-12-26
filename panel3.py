@@ -11,28 +11,24 @@ def read_data_from_file(file_path):
     return data
 
 def safe_button_click(tree):
-    print("Button 1 clicked")
     selected_items = tree.selection()
     if selected_items:
         selected_index = tree.index(selected_items[0])
         print(Threat_BLL.safe_threat(selected_index))
 
 def ignore_button_click(tree):
-    print("Button 2 clicked")
     selected_items = tree.selection()
     if selected_items:
         selected_index = tree.index(selected_items[0])
         print(Threat_BLL.ignore_threat(selected_index))
 
 def limit_button_click(tree):
-    print("Button 3 clicked")
     selected_items = tree.selection()
     if selected_items:
         selected_index = tree.index(selected_items[0])
         print(Threat_BLL.limit_threat(selected_index))
 
 def block_button_click(tree):
-    print("Button 4 clicked")
     selected_items = tree.selection()
     if selected_items:
         selected_index = tree.index(selected_items[0])
@@ -56,10 +52,8 @@ def add_buttons_below_tree(parent_frame,tree):
 
 def show_panel(parent_frame):
     # Đọc dữ liệu từ file
-    read_alert_to_threat()
-    Threat_BLL.load_threat()
     # Tạo Treeview để hiển thị bảng
-    tree = ttk.Treeview(parent_frame, columns=("Source IP", "Destination IP", "Protocol", "Size", "Success"))
+    tree = ttk.Treeview(parent_frame, columns=("Source IP", "Destination IP", "Protocol", "Size"))
     # Đặt tên cột và định dạng
     tree.heading("#0", text="Index")
     tree.column("#0", width=50)
@@ -94,7 +88,5 @@ def show_panel(parent_frame):
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("Panel 1")
-    # Chỉ cần gọi hàm show_panel với đường dẫn đến file txt
     show_panel(root)
-
     root.mainloop()

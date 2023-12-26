@@ -1,6 +1,6 @@
 import os
 from read_alert_to_threat import *
-
+from Threat_BLL import *
 print("Hello world!")
 
 dir_rule = "/usr/local/etc/rules/local.rules"
@@ -55,4 +55,7 @@ dir_config = "/usr/local/etc/snort/snort.lua"
 # for t in bll.threats:
 #     print(t.to_csv_form())
 
-read_alert_to_threat()
+Threat_BLL.load_threat()
+for th in Threat_BLL.get_all_threat():
+    print(th.to_csv_form())
+
