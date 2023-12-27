@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Threat_BLL import *
+from Alert_BLL import *
 from read_alert_to_threat import *
 # Tam thoi ok, khong can sua them
 class MyApp:
@@ -68,6 +69,7 @@ class MyApp:
 if __name__ == "__main__":
     read_alert_to_threat()
     Threat_BLL()
+    Alert_BLL()
     root = tk.Tk()
     app = MyApp(root)
     root.mainloop()
