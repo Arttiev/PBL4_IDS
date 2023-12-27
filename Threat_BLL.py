@@ -1,4 +1,5 @@
 from Threat import *
+from read_alert_to_threat import *
 
 _instance = None
 dir_threat = "threats.txt" # relative from PBL4_IDS
@@ -6,19 +7,13 @@ dir_threat = "threats.txt" # relative from PBL4_IDS
 class Threat_BLL:
     threats = []
 
-    def __init__(self):
-        global _instance
-        if _instance == None:
-            _instance = self
-            Threat_BLL.load_threat()
-
     def get_all_threat():
         return Threat_BLL.threats
 
     def load_threat():
         """
-        read threat.txt and return all threats where action_taken = false
-        initiates the Threat_BLL.threats
+        read threat.txt and return all threats where action_taken = false, 
+        temporary save into the Threat_BLL.threats
         """
         with open(dir_threat,"r") as file:
             lines = file.readlines()
@@ -31,16 +26,32 @@ class Threat_BLL:
         return
 
     def ignore_threat(number):
-        return Threat_BLL.threats[number].ignore()
+        result = Threat_BLL.threats[number].ignore()
+        Threat_BLL.update_threat_list()
+        read_alert_to_threat()
+        Threat_BLL.load_threat()
+        return result
         
     def safe_threat(number):
-        return Threat_BLL.threats[number].safe()
+        result = Threat_BLL.threats[number].safe()
+        Threat_BLL.update_threat_list()
+        read_alert_to_threat()
+        Threat_BLL.load_threat()
+        return result
 
     def limit_threat(number):
-        return Threat_BLL.threats[number].limit()
+        result = Threat_BLL.threats[number].limit()
+        Threat_BLL.update_threat_list()
+        read_alert_to_threat()
+        Threat_BLL.load_threat()
+        return result
 
     def block_threat(number):
-        return Threat_BLL.threats[number].block()
+        result = Threat_BLL.threats[number].block()
+        Threat_BLL.update_threat_list()
+        read_alert_to_threat()
+        Threat_BLL.load_threat()
+        return result
 
     def update_threat_list():
         markline = 0
@@ -52,6 +63,7 @@ class Threat_BLL:
             file.write(str(markline)+"\n")
             for i in range(len(Threat_BLL.threats)):
                 file.write(Threat_BLL.threats[i].to_csv_form()+"\n")
+                
     def to_tuples():
         """
         convert list[Threat] to list(tuples)

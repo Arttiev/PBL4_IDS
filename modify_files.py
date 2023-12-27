@@ -23,14 +23,15 @@ def reload_ufw():
         return "Require permission"
     return "Ufw reloaded"
 
-def reload_service(service):
+def reload_snort(service="snort3-nids"):
+    # can provide service in case of different service name
     # should be used to reload snort-nids
     try:
-        os.popen("systemctl stop snort3-nids") 
-        var = os.popen("systemctl start snort3-nids").read()
+        os.popen("systemctl stop "+service) 
+        var = os.popen("systemctl start snort3-nids"+service).read()
     except PermissionError:
         return "Require permission"
-    return "Snort reloaded"
+    return var
 
 def ufw_execute(cmd):
     # run ufw_execute("ufw reload") to reload firewall and apply new rules

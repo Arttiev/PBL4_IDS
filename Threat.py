@@ -43,7 +43,7 @@ class Threat:
         """
         Need to add following rule to local.rules
         """
-        new_rule = "pass " + self.proto.lower() + " " + self.src_IP + " any -> " + self.dst_IP + " any"
+        new_rule = "pass " + self.proto.lower() + " " + self.src_IP + " any -> " + self.dst_IP + " any ()"
         result = mf.add_local_rules(new_rule)
         self.action_taken=True
         mf.reload_ufw()
