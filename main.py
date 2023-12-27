@@ -73,6 +73,9 @@ class MyApp:
 if __name__ == "__main__":
     read_alert_to_threat()
     Threat_BLL()
+    Alert_BLL()
+    Threat_BLL.load_threat()
+
     root = tk.Tk()
     app = MyApp(root)
     root.mainloop()
