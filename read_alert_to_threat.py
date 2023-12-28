@@ -20,6 +20,8 @@ def read_alert_to_threat():
             # src_IP, dst_IP, protocol, occur, action_taken
             #   0       1         2       3         4
             line = lines[i].strip()
+            if line == "":
+                continue
             temp = line.split(",")
             threats.append(
                 Threat(temp[0], temp[1], temp[2], int(temp[3]), temp[4] == "True")

@@ -53,7 +53,7 @@ def add_buttons_below_tree(parent_frame,tree):
 def show_panel(parent_frame):
     # Đọc dữ liệu từ file
     # Tạo Treeview để hiển thị bảng
-    tree = ttk.Treeview(parent_frame, columns=("Source IP", "Destination IP", "Protocol", "Size"))
+    tree = ttk.Treeview(parent_frame, columns=("Source IP", "Destination IP", "Protocol", "Occurence"))
     # Đặt tên cột và định dạng
     tree.heading("#0", text="Index")
     tree.column("#0", width=50)
@@ -63,8 +63,8 @@ def show_panel(parent_frame):
     tree.column("Destination IP", width=120)
     tree.heading("Protocol", text="Protocol")
     tree.column("Protocol", width=80)
-    tree.heading("Size", text="Size")
-    tree.column("Size", width=80)
+    tree.heading("Occurence", text="Occurence")
+    tree.column("Occurence", width=80)
 
     # Đặt dữ liệu vào bảng
     # for i, row in enumerate(data_from_file):
