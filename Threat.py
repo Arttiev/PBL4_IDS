@@ -43,8 +43,12 @@ class Threat:
         """
         Need to add following rule to local.rules
         """
-        new_rule = "pass " + self.proto.lower() + " " + self.src_IP + " any -> " + self.dst_IP + " any ()"
+        sid = mf.read_sid()
+        if sid == "Error occured":
+            return "failed"
+        new_rule = "pass " + self.proto.lower() + " " + self.src_IP + " any -> " + self.dst_IP + " any (sid: "+ str(sid) +";)"
         result = mf.add_local_rules(new_rule)
+        mf.update_sid(str(int(sid)+1))
         self.action_taken=True
         mf.reload_ufw()
         return result
