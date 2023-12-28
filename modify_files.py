@@ -10,7 +10,7 @@ def add_local_rules(new_rule):
     try:
         with open(dir_rules,"a") as file:
             # to append a new rule to local.rules
-            file.write("\n"+new_rule+"\n")
+            file.write(new_rule+"\n")
         return "Rule added"
     except PermissionError:
         return "Require permission"
@@ -28,7 +28,7 @@ def reload_snort(service="snort3-nids"):
     # should be used to reload snort-nids
     try:
         os.popen("systemctl stop "+service) 
-        var = os.popen("systemctl start snort3-nids"+service).read()
+        var = os.popen("systemctl start "+service).read()
     except PermissionError:
         return "Require permission"
     return var

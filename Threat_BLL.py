@@ -15,6 +15,7 @@ class Threat_BLL:
         read threat.txt and return all threats where action_taken = false, 
         temporary save into the Threat_BLL.threats
         """
+        Threat_BLL.threats = []
         with open(dir_threat,"r") as file:
             lines = file.readlines()
             for i in range(1,len(lines)):
@@ -26,32 +27,60 @@ class Threat_BLL:
         return
 
     def ignore_threat(number):
-        result = Threat_BLL.threats[number].ignore()
-        Threat_BLL.update_threat_list()
-        read_alert_to_threat()
-        Threat_BLL.load_threat()
-        return result
+        #only take action on action_taken = false items:
+        counter = -1
+        for i in range (len(Threat_BLL.threats)):
+            if not Threat_BLL.threats[i].action_taken:
+                counter += 1
+                if number == counter:
+                    result = Threat_BLL.threats[i].ignore()
+                    Threat_BLL.update_threat_list()
+                    read_alert_to_threat()
+                    Threat_BLL.load_threat()
+                    return result
+        return "invalid"
         
     def safe_threat(number):
-        result = Threat_BLL.threats[number].safe()
-        Threat_BLL.update_threat_list()
-        read_alert_to_threat()
-        Threat_BLL.load_threat()
-        return result
+        #only take action on action_taken = false items:
+        counter = -1
+        for i in range (len(Threat_BLL.threats)):
+            if not Threat_BLL.threats[i].action_taken:
+                counter += 1
+                if number == counter:
+                    result = Threat_BLL.threats[i].safe()
+                    Threat_BLL.update_threat_list()
+                    read_alert_to_threat()
+                    Threat_BLL.load_threat()
+                    return result
+        return "invalid"
 
     def limit_threat(number):
-        result = Threat_BLL.threats[number].limit()
-        Threat_BLL.update_threat_list()
-        read_alert_to_threat()
-        Threat_BLL.load_threat()
-        return result
+        #only take action on action_taken = false items:
+        counter = -1
+        for i in range (len(Threat_BLL.threats)):
+            if not Threat_BLL.threats[i].action_taken:
+                counter += 1
+                if number == counter:
+                    result = Threat_BLL.threats[i].limit()
+                    Threat_BLL.update_threat_list()
+                    read_alert_to_threat()
+                    Threat_BLL.load_threat()
+                    return result
+        return "invalid"
 
     def block_threat(number):
-        result = Threat_BLL.threats[number].block()
-        Threat_BLL.update_threat_list()
-        read_alert_to_threat()
-        Threat_BLL.load_threat()
-        return result
+        #only take action on action_taken = false items:
+        counter = -1
+        for i in range (len(Threat_BLL.threats)):
+            if not Threat_BLL.threats[i].action_taken:
+                counter += 1
+                if number == counter:
+                    result = Threat_BLL.threats[i].block()
+                    Threat_BLL.update_threat_list()
+                    read_alert_to_threat()
+                    Threat_BLL.load_threat()
+                    return result
+        return "invalid"
 
     def update_threat_list():
         markline = 0

@@ -46,6 +46,7 @@ class MyApp:
         Threat_BLL.update_threat_list()
         read_alert_to_threat()
         Threat_BLL.load_threat()
+        print("Reloaded all")
         return "Reloaded"
 
     def show_content(self, item_number):
