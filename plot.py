@@ -9,22 +9,33 @@ from Alert_BLL import *
 # tkinter child_frame
 def Protocol_xy(month):
     # list of squares
-    protocol_dict = Alert_BLL.protocol_count(month)
+    protocol_dict = Alert_BLL.count(2, month)
     x = list(protocol_dict.keys())
     y = list(protocol_dict.values())
     return x, y
 
 
+def Month_xy():
+    month_dict = Alert_BLL.count(0)
+    x = list(month_dict.keys())
+    y = list(month_dict.values())
+    return x, y
+
+
 def plot(child_frame, id, month):
     if id == 2:
-        x,y = Protocol_xy(month)
+        x, y = Protocol_xy(month)
+    if id == 3:
+        x, y = Month_xy()
     # the figure that will contain the plot
     fig = Figure(figsize=(3, 3), dpi=100)
     # adding the subplot
     plot1 = fig.add_subplot(111)
-    print(y)
     # plotting the graph
-    plot1.bar(x, y)
+    if id == 2:
+        plot1.bar(x, y)
+    elif id == 3:
+        plot1.plot(x, y)
     plot1.tick_params(axis="x", which="major", labelsize=8)
     # creating the Tkinter canvas
     # containing the Matplotlib figure

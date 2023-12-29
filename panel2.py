@@ -17,7 +17,7 @@ class panel2:
         self.child_frame = ttk.Frame(parent_frame)
         self.child_frame.pack(fill="both", expand=True)
         self.month = "all"
-        items = ["Treeview", "Protocol_plot", "Threats"]
+        items = ["Treeview", "Protocol_plot", "Month_plot"]
         self.button_frame = ttk.Frame(parent_frame)
         self.button_frame.pack()
         for i, item in enumerate(items):

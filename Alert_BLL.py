@@ -2,7 +2,8 @@ from Alert import *
 
 _instance = None
 dir_Alert = "alert_csv.txt"  # relative from PBL4_IDS
-#dir_Alert = "/var/log/snort/alert_csv.txt"
+# dir_Alert = "/var/log/snort/alert_csv.txt"
+
 
 class Alert_BLL:
     alerts = []
@@ -29,7 +30,20 @@ class Alert_BLL:
                 line = lines[i].strip()
                 temp = line.split(",")
                 Alert_BLL.alerts.append(
-                    Alert(temp[0], temp[1], temp[2], int(temp[3]), temp[4], temp[5], temp[6], temp[7], temp[8], temp[9], temp[10], temp[11])
+                    Alert(
+                        temp[0],
+                        temp[1],
+                        temp[2],
+                        int(temp[3]),
+                        temp[4],
+                        temp[5],
+                        temp[6],
+                        temp[7],
+                        temp[8],
+                        temp[9],
+                        temp[10],
+                        temp[11],
+                    )
                 )
         return
 
@@ -56,30 +70,67 @@ class Alert_BLL:
             for i in range(len(Alert_BLL.alerts)):
                 file.write(Alert_BLL.alerts[i].to_csv_form() + "\n")
 
-    def to_tuples(month = "all"):
+    def to_tuples(month="all"):
         """
         convert list[Alert] to list(tuples)
         """
         d = []
         for alert in Alert_BLL.alerts:
-            if (month == "all"):
-                d.append((alert.timestamp, alert.action, alert.protocol, alert.gid, alert.sid, alert.rev, alert.msg, alert.service, alert.src_IP, alert.src_Port, alert.dst_IP, alert.dst_Port))
+            if month == "all":
+                d.append(
+                    (
+                        alert.timestamp,
+                        alert.action,
+                        alert.protocol,
+                        alert.gid,
+                        alert.sid,
+                        alert.rev,
+                        alert.msg,
+                        alert.service,
+                        alert.src_IP,
+                        alert.src_Port,
+                        alert.dst_IP,
+                        alert.dst_Port,
+                    )
+                )
             else:
                 temp_month = alert.timestamp[0:2]
-                if (temp_month == month):
-                    d.append((alert.timestamp, alert.action, alert.protocol, alert.gid, alert.sid, alert.rev, alert.msg, alert.service, alert.src_IP, alert.src_Port, alert.dst_IP, alert.dst_Port))
+                if temp_month == month:
+                    d.append(
+                        (
+                            alert.timestamp,
+                            alert.action,
+                            alert.protocol,
+                            alert.gid,
+                            alert.sid,
+                            alert.rev,
+                            alert.msg,
+                            alert.service,
+                            alert.src_IP,
+                            alert.src_Port,
+                            alert.dst_IP,
+                            alert.dst_Port,
+                        )
+                    )
         return d
 
-    def protocol_count(month = "all") -> dict:
-        dict = {}
+    def count(id, month="all") -> dict:
+        dict1 = {}
+        monthdict = {"01":0, "02":0, "03":0, "04":0, "05":0, "06":0, "07":0, "08":0, "09":0, "10":0, "11":0, "12":0}
         alert_List = Alert_BLL.to_tuples(month)
         alert_List = [list(alert_item) for alert_item in alert_List]
         for item in alert_List:
-            if (str(item[2]) not in dict.keys()):
-                dict[str(item[2])] = 1
+            if id != 0:
+                if str(item[id]) not in dict1.keys():
+                    dict1[str(item[id])] = 1
+                else:
+                    dict1[str(item[id])] += 1
             else:
-                dict[str(item[2])] += 1
-        return dict
+                monthdict[str(item[id][0:2])] += 1
+                monthdict = dict(sorted(monthdict.items()))
+        if id == 0:
+            return monthdict
+        return dict1
 
 
 # How to use
