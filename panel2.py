@@ -16,7 +16,7 @@ class panel2:
         self.parent_frame = parent_frame
         self.child_frame = ttk.Frame(parent_frame)
         self.child_frame.pack(fill="both", expand=True)
-        self.days = "all"
+        self.month = "all"
         items = ["Treeview", "Protocol_plot", "Threats"]
         self.button_frame = ttk.Frame(parent_frame)
         self.button_frame.pack()
@@ -30,7 +30,7 @@ class panel2:
         self.text_field = tk.Entry(self.button_frame)
         self.text_field.grid(row=0, column=4, padx=5)
 
-    def create_Treeview(self, days = "all"):
+    def create_Treeview(self, month = "all"):
         tree = ttk.Treeview(
             self.child_frame,
             columns=(
@@ -79,7 +79,7 @@ class panel2:
         # Đặt dữ liệu vào bảng
         # for i, row in enumerate(data_from_file):
         #     tree.insert("", i, text=str(i), values=row)
-        for i, alert in enumerate(Alert_BLL.to_tuples(days)):
+        for i, alert in enumerate(Alert_BLL.to_tuples(month)):
             tree.insert("", i, text=str(i), values=alert)
         # Hiển thị Treeview
         tree.pack(expand=True, fill="both")
@@ -99,11 +99,15 @@ class panel2:
         # Xóa nội dung hiện tại
         for widget in self.child_frame.winfo_children():
             widget.destroy()
+        if self.text_field.get() =="":
+            self.month = "all"
+        else:
+            self.month = self.text_field.get()
         # Hiển thị nội dung mới tương ứng với mục được chọn
         if item_id == 1:
-            self.create_Treeview()
+            self.create_Treeview(self.month)
         elif item_id != 1:
-            plot.plot(self.child_frame, item_id)
+            plot.plot(self.child_frame, item_id, self.month)
 
     # def show_panel(self, parent_frame):
     #     # Đọc dữ liệu từ file
@@ -122,6 +126,6 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.title("Panel 1")
     # Chỉ cần gọi hàm show_panel với đường dẫn đến file txt
-    panel2.show_panel(root)
+    panel2(root)
 
     root.mainloop()

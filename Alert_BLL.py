@@ -56,19 +56,23 @@ class Alert_BLL:
             for i in range(len(Alert_BLL.alerts)):
                 file.write(Alert_BLL.alerts[i].to_csv_form() + "\n")
 
-    def to_tuples(days = "all"):
+    def to_tuples(month = "all"):
         """
         convert list[Alert] to list(tuples)
         """
         d = []
         for alert in Alert_BLL.alerts:
-            d.append((alert.timestamp, alert.action, alert.protocol, alert.gid, alert.sid, alert.rev, alert.msg, alert.service, alert.src_IP, alert.src_Port, alert.dst_IP, alert.dst_Port))
-        print(type(d[0]))
+            if (month == "all"):
+                d.append((alert.timestamp, alert.action, alert.protocol, alert.gid, alert.sid, alert.rev, alert.msg, alert.service, alert.src_IP, alert.src_Port, alert.dst_IP, alert.dst_Port))
+            else:
+                temp_month = alert.timestamp[0:2]
+                if (temp_month == month):
+                    d.append((alert.timestamp, alert.action, alert.protocol, alert.gid, alert.sid, alert.rev, alert.msg, alert.service, alert.src_IP, alert.src_Port, alert.dst_IP, alert.dst_Port))
         return d
 
-    def protocol_count() -> dict:
+    def protocol_count(month = "all") -> dict:
         dict = {}
-        alert_List = Alert_BLL.to_tuples()
+        alert_List = Alert_BLL.to_tuples(month)
         alert_List = [list(alert_item) for alert_item in alert_List]
         for item in alert_List:
             if (str(item[2]) not in dict.keys()):

@@ -7,17 +7,17 @@ from Alert_BLL import *
 # plot function is created for
 # plotting the graph in
 # tkinter child_frame
-def Protocol_xy():
+def Protocol_xy(month):
     # list of squares
-    protocol_dict = Alert_BLL.protocol_count()
+    protocol_dict = Alert_BLL.protocol_count(month)
     x = list(protocol_dict.keys())
     y = list(protocol_dict.values())
     return x, y
 
 
-def plot(child_frame, id):
+def plot(child_frame, id, month):
     if id == 2:
-        x,y = Protocol_xy()
+        x,y = Protocol_xy(month)
     # the figure that will contain the plot
     fig = Figure(figsize=(3, 3), dpi=100)
     # adding the subplot
