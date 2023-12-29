@@ -1,4 +1,4 @@
 git pull
 git add .
-git commit -m "OK part 2"
+git commit -m "msg: %1"
 git push
