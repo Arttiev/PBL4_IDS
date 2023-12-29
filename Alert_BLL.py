@@ -56,7 +56,7 @@ class Alert_BLL:
             for i in range(len(Alert_BLL.alerts)):
                 file.write(Alert_BLL.alerts[i].to_csv_form() + "\n")
 
-    def to_tuples():
+    def to_tuples(days = "all"):
         """
         convert list[Alert] to list(tuples)
         """

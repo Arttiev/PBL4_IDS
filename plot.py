@@ -7,15 +7,19 @@ from Alert_BLL import *
 # plot function is created for
 # plotting the graph in
 # tkinter child_frame
-def Protocol_plot(child_frame):
-    # the figure that will contain the plot
-    fig = Figure(figsize=(3, 3), dpi=100)
-
+def Protocol_xy():
     # list of squares
     protocol_dict = Alert_BLL.protocol_count()
     x = list(protocol_dict.keys())
     y = list(protocol_dict.values())
+    return x, y
 
+
+def plot(child_frame, id):
+    if id == 2:
+        x,y = Protocol_xy()
+    # the figure that will contain the plot
+    fig = Figure(figsize=(3, 3), dpi=100)
     # adding the subplot
     plot1 = fig.add_subplot(111)
     print(y)

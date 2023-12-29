@@ -3,13 +3,14 @@ from tkinter import ttk
 from Threat_BLL import *
 from Alert_BLL import *
 from read_alert_to_threat import *
+from panel2 import panel2
 # Tam thoi ok, khong can sua them
 class MyApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Quản trị mạng")
         self.root.geometry("600x400")  # Tăng kích thước cửa sổ
-        self.root.resizable(width=True, height=True)
+        self.root.resizable(width=False, height=True)
         # Tạo thanh điều hướng bên trái
         self.navigation_frame = ttk.Frame(self.root, width=5)
         self.navigation_frame.grid(row=0, column=0, sticky="ns")
@@ -64,9 +65,13 @@ class MyApp:
     def load_panel(self, panel_filename):
         try:
             # Import module dynamically
-            panel_module = __import__(panel_filename.replace(".py", ""))
+            if (panel_filename != "panel2.py"):
+                panel_module = __import__(panel_filename.replace(".py", ""))
+                panel_module.show_panel(self.content_frame)
+            else:
+                panel2(self.content_frame)
+                # panel2.show_panel(self.content_frame)
             # Call a function (assuming there is a function named 'show_panel' in panel module)
-            panel_module.show_panel(self.content_frame)
         except ImportError:
             # Handle import error
             print(f"Error loading panel: {panel_filename}")
