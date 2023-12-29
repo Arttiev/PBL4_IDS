@@ -7,3 +7,12 @@
 12/23-20:17:02.338695,would_block,TCP,1,1000015,1,"Suspicious traffic to a destination",unknown,192.168.1.1,53,192.168.1.17,47260
 12/23-20:17:02.338695,would_block,TCP,1,1000015,1,"Suspicious traffic to a destination",unknown,192.168.1.1,53,192.168.1.17,47268
 12/23-20:17:02.757464,would_block,TCP,1,1000015,1,"Suspicious traffic to a destination",unknown,88.208.20.10,443,192.168.1.17,56136
+12/23-20:17:01.604453,would_block,UDP,1,1000015,1,"Suspicious traffic to a destination",unknown,45.133.44.3,80,192.168.1.17,40990
+12/23-20:17:01.604955,would_block,HTTP,1,1000015,1,"Suspicious traffic to a destination",unknown,45.133.44.3,80,192.168.1.17,40990
+12/23-20:17:02.070452,would_block,HTTP,1,1000015,1,"Suspicious traffic to a destination",unknown,45.133.44.3,80,192.168.1.17,41022
+12/23-20:17:02.070968,would_block,HTTPS,1,1000015,1,"Suspicious traffic to a destination",unknown,45.133.44.3,80,192.168.1.17,41022
+12/23-20:17:02.337341,would_block,TELNET,1,1000015,1,"Suspicious traffic to a destination",unknown,192.168.1.1,53,192.168.1.17,47260
+12/23-20:17:02.337341,would_block,TELNET,1,1000015,1,"Suspicious traffic to a destination",unknown,192.168.1.1,53,192.168.1.17,47268
+12/23-20:17:02.338695,would_block,UDP,1,1000015,1,"Suspicious traffic to a destination",unknown,192.168.1.1,53,192.168.1.17,47260
+12/23-20:17:02.338695,would_block,UDP,1,1000015,1,"Suspicious traffic to a destination",unknown,192.168.1.1,53,192.168.1.17,47268
+12/23-20:17:02.757464,would_block,UDP,1,1000015,1,"Suspicious traffic to a destination",unknown,88.208.20.10,443,192.168.1.17,56136

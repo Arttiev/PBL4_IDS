@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Alert_BLL import *
+import plot
 
 
 def read_data_from_file(file_path):
@@ -11,70 +12,34 @@ def read_data_from_file(file_path):
     return data
 
 
-def safe_button_click(tree):
-    print("Button 1 clicked")
-    selected_items = tree.selection()
-    if selected_items:
-        selected_index = tree.index(selected_items[0])
-        print(Alert_BLL.safe_Alert(selected_index))
-
-
-def ignore_button_click(tree):
-    print("Button 2 clicked")
-    selected_items = tree.selection()
-    if selected_items:
-        selected_index = tree.index(selected_items[0])
-        print(Alert_BLL.ignore_Alert(selected_index))
-
-
-def limit_button_click(tree):
-    print("Button 3 clicked")
-    selected_items = tree.selection()
-    if selected_items:
-        selected_index = tree.index(selected_items[0])
-        print(Alert_BLL.limit_Alert(selected_index))
-
-
-def block_button_click(tree):
-    print("Button 4 clicked")
-    selected_items = tree.selection()
-    if selected_items:
-        selected_index = tree.index(selected_items[0])
-        print(Alert_BLL.block_Alert(selected_index))
-
-
-def add_buttons_below_tree(parent_frame, tree):
+def add_buttons_below_tree(parent_frame, child_frame):
+    items = ["Treeview", "Protocol_plot", "Threats"]
     button_frame = ttk.Frame(parent_frame)
     button_frame.pack()
-
-    button1 = ttk.Button(
-        button_frame, text="Safe", command=lambda: safe_button_click(tree)
-    )
-    button1.grid(row=0, column=0, padx=5)
-
-    button2 = ttk.Button(
-        button_frame, text="Ignore", command=lambda: ignore_button_click(tree)
-    )
-    button2.grid(row=0, column=1, padx=5)
-
-    button3 = ttk.Button(
-        button_frame, text="Limit", command=lambda: limit_button_click(tree)
-    )
-    button3.grid(row=0, column=2, padx=5)
-
-    button4 = ttk.Button(
-        button_frame, text="Block", command=lambda: block_button_click(tree)
-    )
-    button4.grid(row=0, column=3, padx=5)
+    for i, item in enumerate(items):
+        button = ttk.Button(
+            button_frame, text=item, command=lambda i=i: click(child_frame, i + 1)
+        )
+        button.grid(row=0, column=i, padx=5)
 
 
-def show_panel(parent_frame):
-    # Đọc dữ liệu từ file
-
-    # Tạo Treeview để hiển thị bảng
+def create_Treeview(child_frame):
     tree = ttk.Treeview(
-        parent_frame,
-        columns=("Timestamp", "Action", "Protocol", "Gid", "Sid", "Rev", "Message", "Service", "Source IP", "Source Port", "Destination IP", "Destination Port")
+        child_frame,
+        columns=(
+            "Timestamp",
+            "Action",
+            "Protocol",
+            "Gid",
+            "Sid",
+            "Rev",
+            "Message",
+            "Service",
+            "Source IP",
+            "Source Port",
+            "Destination IP",
+            "Destination Port",
+        ),
     )
     # Đặt tên cột và định dạng
     tree.heading("#0", text="Index")
@@ -112,15 +77,39 @@ def show_panel(parent_frame):
     # Hiển thị Treeview
     tree.pack(expand=True, fill="both")
 
-    x_scrollbar = ttk.Scrollbar(parent_frame, orient="horizontal", command=tree.xview)
+    x_scrollbar = ttk.Scrollbar(child_frame, orient="horizontal", command=tree.xview)
     x_scrollbar.pack(side="bottom", fill="x")
 
     # Tạo một cột ảo với chiều rộng lớn để tạo nút cuộn ngang
 
     # Kết nối thanh cuộn ngang với cột ảo
     tree.configure(xscrollcommand=x_scrollbar.set)
+    return tree
+
+
+def click(child_frame, item_id):
+    # Xóa nội dung hiện tại
+    for widget in child_frame.winfo_children():
+        widget.destroy()
+    # Hiển thị nội dung mới tương ứng với mục được chọn
+    if item_id == 1:
+        create_Treeview(child_frame)
+    elif item_id == 2:
+        plot.Protocol_plot(child_frame)
+    elif item_id == 3:
+        create_Treeview(child_frame)
+
+
+def show_panel(parent_frame):
+    # Đọc dữ liệu từ file
+
+    # Tạo frame con
+    child_frame = ttk.Frame(parent_frame)
+    child_frame.pack(fill="both", expand=True)
+    # Tạo Treeview để hiển thị bảng
+    # tree = create_Treeview(parent_frame)
     # Thêm các nút dưới bảng
-    add_buttons_below_tree(parent_frame, tree)
+    add_buttons_below_tree(parent_frame, child_frame)
 
 
 # Mở cửa sổ và hiển thị bảng (không gọi)

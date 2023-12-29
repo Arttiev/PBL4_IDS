@@ -1,8 +1,8 @@
 from Alert import *
 
 _instance = None
-# dir_Alert = "alert_csv.txt"  # relative from PBL4_IDS
-dir_Alert = "/var/log/snort/alert_csv.txt"
+dir_Alert = "alert_csv.txt"  # relative from PBL4_IDS
+#dir_Alert = "/var/log/snort/alert_csv.txt"
 
 class Alert_BLL:
     alerts = []
@@ -63,7 +63,19 @@ class Alert_BLL:
         d = []
         for alert in Alert_BLL.alerts:
             d.append((alert.timestamp, alert.action, alert.protocol, alert.gid, alert.sid, alert.rev, alert.msg, alert.service, alert.src_IP, alert.src_Port, alert.dst_IP, alert.dst_Port))
+        print(type(d[0]))
         return d
+
+    def protocol_count() -> dict:
+        dict = {}
+        alert_List = Alert_BLL.to_tuples()
+        alert_List = [list(alert_item) for alert_item in alert_List]
+        for item in alert_List:
+            if (str(item[2]) not in dict.keys()):
+                dict[str(item[2])] = 1
+            else:
+                dict[str(item[2])] += 1
+        return dict
 
 
 # How to use

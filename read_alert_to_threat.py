@@ -1,7 +1,7 @@
 from Threat import *
 
-dir_log = "/var/log/snort/alert_csv.txt"
-# dir_log = "alert_csv.txt" # for testing on windows
+#dir_log = "/var/log/snort/alert_csv.txt"
+dir_log = "alert_csv.txt" # for testing on windows
 
 
 def read_alert_to_threat():
