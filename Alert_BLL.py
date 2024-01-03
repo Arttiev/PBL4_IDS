@@ -1,8 +1,8 @@
 from Alert import *
 
 _instance = None
-dir_Alert = "alert_csv.txt"  # relative from PBL4_IDS
-# dir_Alert = "/var/log/snort/alert_csv.txt"
+# dir_Alert = "alert_csv.txt"  # relative from PBL4_IDS
+dir_Alert = "/var/log/snort/alert_csv.txt"
 
 
 class Alert_BLL:
